@@ -16,6 +16,7 @@
     --second-bg-color:#131313;
     --text-color:white;
     --main-color:#00ffee;
+    
 }
 
 html{
@@ -144,16 +145,18 @@ span{
     border-radius: 50%;
 }
 
-.home-img img{
+.home-img img {
     position: relative;
     top: 3rem;
     width: 32vw;
-    border-radius: 10%;
+    height: 32vw; /* Ensures the image is a perfect square */
+    border-radius: 50%; /* Makes the image circular */
     box-shadow: 0 0 25px var(--main-color);
     cursor: pointer;
     transition: 0.4s ease-in-out;
-
+    object-fit: cover; /* Ensures the image fits the circular shape without distortion */
 }
+
 
 .home-img img:hover{
     box-shadow: 0 0 25px var(--main-color),
@@ -523,6 +526,7 @@ span{
     border-radius: 5%;
     border: 3px solid var(--main-color);
     box-shadow: 0 0 25px var(--main-color);
+    
 }
 
 .wrapper{
@@ -532,7 +536,7 @@ span{
 }
 
 .testimonial-item{
-    min-height: 500px;
+    min-height: 300px;
     max-width: 450px;
     background:rgba(0,0,0,0.7);
     border: 3px solid rgba(238,238,238,0.2);
