@@ -29,6 +29,7 @@ body{
     color: var(--text-color);
 }
 
+
 .header{
     position: fixed;
     top: 0;
@@ -125,6 +126,16 @@ span{
 
 .logo span{
     color: var(--main-color);
+}
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+    color: #fff;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-decoration: none;  /* This removes the underline */
 }
 
 .home-content h3{
@@ -446,40 +457,95 @@ span{
     width: 50px;
 }
 
-.services{
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: Poppins, sans-serif;
+    color: #f0f0f0;
+}
+
+body {
+    min-height: 100vh;
+    background: #0b0d15;
+    color: #a2a5b3;
+    align-content: center;
+}
+
+h1, h2 {
+    color: white;
+}
+
+.services {
     background: var(--bg-color);
     color: black;
 }
 
-.services h2{
+.services h2 {
     margin-bottom: 5rem;
     color: white;
 }
 
-.services-container{
+.services-container {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     align-items: center;
     gap: 5rem;
 }
 
-.service-box{
-    background-color: var(--main-color);
-    height: 400px;
-    border-radius: 3rem;
-    border: 5px solid transparent;
+.service-box {
+    background-color:black; /* Dark background inside the box */
+    height: 300px;
+    width: 370px;
+    border-radius: 3rem; /* Rounded corners */
+    position: relative; /* Needed for pseudo-elements */
+    overflow: hidden; /* Hide the animated border overflow */
     cursor: pointer;
     transition: 0.4s ease-in-out;
+    z-index: 1; /* Keeps content above the pseudo-elements */
 }
 
-.service-box:hover{
-    background: white;
-    color: black;
-    border: 5px solid var(--main-color);
-    transform: scale(1.03);
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
 }
 
-.service-box .service-info{
+.service-box::after,
+.service-box::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(
+        from var(--angle),
+        #ff4545,
+        #00ff99,
+        #0800ff,
+        #d9ff00,
+        #ff4545
+
+    );
+    
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1; /* Places the animation behind the box content */
+    border-radius: 3rem;
+    animation: spin 3s linear infinite;
+}
+
+.service-box::before {
+    filter: blur(1.5rem); /* Glow effect for the border */
+    opacity: 0.5;
+    padding: 6px; /* Creates the visible border thickness */
+}
+
+
+
+.service-box .service-info {
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -487,22 +553,68 @@ span{
     justify-content: left;
     align-items: baseline;
     padding: 1rem 4rem;
+    z-index: 1; /* Ensures the content is above the border animation */
+    position: relative;
 }
 
-.service-info h4{
+.service-info h4 {
     font-size: 3rem;
     font-weight: 800;
     line-height: 2;
 }
 
-
-.service-info p{
+.service-info p {
     font-size: 1.6rem;
     font-weight: 600;
     max-height: 100px;
     line-height: 1.7;
     margin: auto;
 }
+
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    }
+    to {
+        --angle: 360deg;
+    }
+}
+
+.services-container {
+    display: flex; /* Enable flex layout */
+    justify-content: space-between; /* Space between the boxes */
+    align-items: stretch; /* Align items vertically */
+    gap: 20px; /* Add spacing between the boxes */
+    flex-wrap: nowrap; /* Prevent wrapping to a new line */
+}
+
+.service-box {
+    flex: 1; /* Make all boxes take up equal space */
+    min-width: 0; /* Prevent overflow issues */
+    background:black;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.service-box:hover {
+    box-shadow: white;
+    transform: translateY(-5px);
+}
+
+.service-box h4 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.service-box p {
+    font-size: 1.5rem;
+    color:black;
+}
+
+
 
 
 .testimonials{
